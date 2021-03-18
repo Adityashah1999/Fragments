@@ -1,5 +1,6 @@
 package com.example.android.fragmentexample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Get the button for opening and closing the fragment.
-        mButton = findViewById(R.id.open_button);
+        mButton = findViewById(R.id.open_button1);
 
         // If returning from a configuration change, get the
         // fragment state and set the button text.
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction();
 
         // Add the SimpleFragment.
-        fragmentTransaction.add(R.id.fragment_container,
+        fragmentTransaction.add(R.id.fragment_container2,
                 simpleFragment).addToBackStack(null).commit();
 
         // Update the Button text.
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         // Check to see if the fragment is already showing.
         SimpleFragment simpleFragment = (SimpleFragment) fragmentManager
-                .findFragmentById(R.id.fragment_container);
+                .findFragmentById(R.id.fragment_container2);
         if (simpleFragment != null) {
             // Create and commit the transaction to remove the fragment.
             FragmentTransaction fragmentTransaction =
@@ -92,5 +93,10 @@ public class MainActivity extends AppCompatActivity {
         // Save the state of the fragment (true=open, false=closed).
         savedInstanceState.putBoolean(STATE_FRAGMENT, isFragmentDisplayed);
         super.onSaveInstanceState(savedInstanceState);
+    }
+
+    public void onNextClick(View view) {
+        Intent intent = new Intent(this, SecondActivity.class);
+        startActivity(intent);
     }
 }
